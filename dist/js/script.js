@@ -59,8 +59,8 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.initAccordion();
 
-      console.log('new Product:', thisProduct);
     }
     renderInMenu() {
       const thisProduct = this;
@@ -72,14 +72,53 @@
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
 
       /* find menu container */
-      const menuContainer = document.querySelector(select.containerOf.menu)
+      const menuContainer = document.querySelector(select.containerOf.menu);
 
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
 
     }
 
+    getElements() {
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
+    initAccordion() {
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const article = document.querySelector(select.all.menuProducts);
+      const clickableTrigger = article.querySelector(select.menuProduct.clickable);
+
+      /* START: add event listener to clickable trigger on event click */
+      clickableTrigger.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+
+        /* find active product (product that has active class) */
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
+
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        for (let activeProduct of activeProducts) {
+          if (activeProduct !== thisProduct.element) {
+            activeProduct.classList.remove('.active');
+            console.log('removed');
+
+          }
+        }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle('.active');
+      });
+
+    }
+
   }
+
 
 
   const app = {
