@@ -218,7 +218,7 @@
 
       /* TODO : Add validation */
 
-      if (thisWidget.value !== newValue && !isNaN(newValue)) {
+      if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
       }
       thisWidget.input.value = thisWidget.value;
@@ -231,10 +231,8 @@
       });
       thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
-        // Add a check to prevent the value from going below zero
-        if (thisWidget.value > 0) {
-          thisWidget.setValue(thisWidget.value - 1);
-        }
+        thisWidget.setValue(thisWidget.value - 1);
+
       });
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
