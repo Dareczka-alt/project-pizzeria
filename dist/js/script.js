@@ -44,7 +44,7 @@
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
-      defaultMax: 9,
+      defaultMax: 10,
     }
   };
 
@@ -222,12 +222,14 @@
     setValue(value) {
       const thisWidget = this;
       const newValue = parseInt(value);
-      newValue == settings.amountWidget.defaultValue;
+
 
       /* TODO : Add validation */
 
       if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
+      } else {
+        thisWidget.value = settings.amountWidget.defaultValue;
       }
       thisWidget.input.value = thisWidget.value;
       this.announce();
