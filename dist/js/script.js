@@ -398,6 +398,9 @@
 
       /* add element to menu */
       thisCart.dom.productList.appendChild(menuProduct);
+
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.products', thisCart.products);
     }
 
   }
