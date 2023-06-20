@@ -362,7 +362,7 @@
 
       thisCart.getElements(element);
       thisCart.initActions();
-      thisCart.add();
+
 
     }
 
@@ -387,6 +387,7 @@
 
     }
 
+
     add(menuProduct) {
       const thisCart = this;
       console.log('adding product', menuProduct);
@@ -394,16 +395,17 @@
       const generatedHTML = templates.cartProduct(menuProduct);
 
       /* create element using utils.createElementFromHTML */
-      menuProduct = utils.createDOMFromHTML(generatedHTML);
+      menuProduct.element = utils.createDOMFromHTML(generatedHTML);
 
       /* add element to menu */
-      thisCart.dom.productList.appendChild(menuProduct);
+      thisCart.dom.productList.appendChild(menuProduct.element);
 
       thisCart.products.push(menuProduct);
-      console.log('thisCart.products', thisCart.products);
+      console.log('thisCart.products:', thisCart.products);
     }
 
   }
+
 
   const app = {
     initData: function () {
@@ -425,6 +427,8 @@
       thisApp.cart = new Cart(cartElem);
 
     },
+
+
 
     init: function () {
       const thisApp = this;
