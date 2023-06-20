@@ -364,6 +364,7 @@
       thisCart.initActions();
 
 
+
     }
 
 
@@ -375,7 +376,10 @@
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
-
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
+      thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
     }
 
     initActions() {
@@ -390,7 +394,7 @@
 
     add(menuProduct) {
       const thisCart = this;
-      console.log('adding product', menuProduct);
+
       /* generate HTML based on template */
       const generatedHTML = templates.cartProduct(menuProduct);
 
@@ -401,7 +405,33 @@
       thisCart.dom.productList.appendChild(menuProduct.element);
 
       thisCart.products.push(new CartProduct(menuProduct, menuProduct.element));
-      console.log('thisCart.products:', thisCart.products);
+      thisCart.update();
+
+    }
+
+    update() {
+      const thisCart = this;
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+      let totalPrice = 0;
+
+      for (let product of thisCart.products) {
+        totalNumber += product.amount;
+        subtotalPrice += product.price;
+        totalPrice = subtotalPrice + deliveryFee;
+        if (totalNumber == 0) {
+          deliveryFee == 0
+        }
+      }
+      console.log(totalNumber, subtotalPrice, totalPrice);
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      for (let price of thisCart.dom.totalPrice) {
+        price.innerHTML = totalPrice;
+      }
+
     }
 
   }
@@ -420,7 +450,7 @@
 
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
-      console.log('thisCartProduct:', thisCartProduct);
+
 
 
     }
