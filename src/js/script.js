@@ -487,11 +487,23 @@
       payload.subtotalPrice = thisCart.subtotalPrice;
       payload.totalNumber = thisCart.totalNumber;
       payload.deliveryFee = thisCart.deliveryFee;
-      payload.products = thisCart.products;
+      payload.products = [];
+
+      for (let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch(url, options);
 
 
-
-      console.log('payload', payload);
 
     }
 
@@ -564,6 +576,20 @@
         thisCartProduct.remove();
       });
 
+
+    }
+
+    getData() {
+      const thisCartProduct = this;
+      const prepProd = {};
+      prepProd.id = thisCartProduct.id;
+      prepProd.amount = thisCartProduct.amount;
+      prepProd.price = thisCartProduct.price;
+      prepProd.priceSingle = thisCartProduct.priceSingle;
+      prepProd.name = thisCartProduct.name;
+      prepProd.params = thisCartProduct.params;
+
+      return (prepProd);
 
     }
   }
