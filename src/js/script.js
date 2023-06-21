@@ -486,7 +486,7 @@
       payload.totalPrice = thisCart.totalPrice;
       payload.subtotalPrice = thisCart.subtotalPrice;
       payload.totalNumber = thisCart.totalNumber;
-      payload.deliveryFee = thisCart.totalPrice - thisCart.subtotalPrice;
+      payload.deliveryFee = thisCart.deliveryFee;
       payload.products = thisCart.products;
 
 
