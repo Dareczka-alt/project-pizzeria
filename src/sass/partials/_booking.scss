@@ -173,6 +173,11 @@
       }
 
     }
+
+    &.selected {
+      background: yellow;
+
+    }
   }
 
   [data-table="1"] {

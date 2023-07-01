@@ -263,5 +263,20 @@
       ]
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "date": "2023-07-01",
+      "hour": "12:00",
+      "table": 1,
+      "duration": 2,
+      "ppl": 2,
+      "starters": [
+        "water",
+        "bread"
+      ],
+      "phone": "123",
+      "address": "adsad",
+      "id": 1
+    }
+  ]
 }
