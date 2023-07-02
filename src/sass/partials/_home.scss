@@ -108,6 +108,7 @@ h3 {
     height: 200px;
     margin-right: 10px;
     display: inline-block;
+    counter-increment: gallery-cell;
 
   }
 }
